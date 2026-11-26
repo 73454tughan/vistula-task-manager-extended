@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager Extended</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div>
+        <h1>Task Manager Extended</h1>
+        <p class="subtitle">Student ID: 73454</p>
+      </div>
+      <a class="nav-link" href="statistics.html">View Statistics &rarr;</a>
+    </header>
+
+    <section class="card">
+      <h2>Categories</h2>
+      <form id="categoryForm" class="row-form">
+        <input type="text" id="categoryName" placeholder="New category (e.g. University)" required>
+        <button type="submit">Add Category</button>
+      </form>
+      <div id="categoryList" class="chip-list"></div>
+    </section>
+
+    <section class="card">
+      <h2 id="taskFormTitle">Add New Task</h2>
+      <form id="taskForm">
+        <input type="hidden" id="editTaskId">
+        <label for="taskTitle">Title *</label>
+        <input type="text" id="taskTitle" placeholder="Task title" required>
+
+        <label for="taskDescription">Description (optional)</label>
+        <input type="text" id="taskDescription" placeholder="Short description">
+
+        <label for="taskCategory">Category *</label>
+        <select id="taskCategory" required></select>
+
+        <div class="form-actions">
+          <button type="submit" id="saveTaskBtn">Add Task</button>
+          <button type="button" id="cancelEditBtn" class="secondary hidden">Cancel Edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Tasks</h2>
+      <div class="filters">
+        <div>
+          <label for="filterCategory">Filter by Category</label>
+          <select id="filterCategory">
+            <option value="all">All Categories</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterStatus">Filter by Status</label>
+          <select id="filterStatus">
+            <option value="all">All</option>
+            <option value="false">Incomplete</option>
+            <option value="true">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <p id="statusMsg" class="status-msg"></p>
+      <ul id="taskList" class="task-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
