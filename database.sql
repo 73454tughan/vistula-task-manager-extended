@@ -22,18 +22,25 @@ INSERT INTO categories (name) VALUES
     ('Work'),
     ('Personal');
 
--- 4. Row Level Security (RLS) policies for the demonstration database
-ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
-ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+-- 4. Grant table & sequence privileges for PostgREST anon/authenticated roles
+GRANT USAGE ON SCHEMA public TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.categories, public.tasks TO anon, authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
 
+-- 5. Row Level Security (RLS) policies for the demonstration database
+ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Demo allow all on categories" ON public.categories;
 CREATE POLICY "Demo allow all on categories"
-    ON categories FOR ALL
+    ON public.categories FOR ALL
     TO anon, authenticated
     USING (true)
     WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Demo allow all on tasks" ON public.tasks;
 CREATE POLICY "Demo allow all on tasks"
-    ON tasks FOR ALL
+    ON public.tasks FOR ALL
     TO anon, authenticated
     USING (true)
     WITH CHECK (true);
